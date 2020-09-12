@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, ScrollView, TextInput, Button, View, Image, KeyboardAvoidingView, Platform, ActivityIndicator, Alert } from 'react-native';
+import { StyleSheet, ScrollView, TextInput, Button, View, Image, KeyboardAvoidingView, Platform, ActivityIndicator, Alert, AsyncStorage } from 'react-native';
 import FormRow from '../components/FormRow';
 import firebase from 'firebase';
 
@@ -11,9 +11,13 @@ export default class LoginPage extends React.Component {
             senha: ""
         }
     }
-    access() {
+
+    access(userData) {
+
         this.setState({ isLoading: false });
         this.props.navigation.replace('Pessoas');
+        AsyncStorage.setItem('NT:UserData', JSON.stringify(userData));
+
     }
 
     getMsgByErrorCode(errorCode) {
@@ -42,8 +46,6 @@ export default class LoginPage extends React.Component {
     login() {
         this.setState({
             isLoading: true,
-            message: '',
-            isLoading: false,
             message: ''
         });
         const { email, senha } = this.state;
@@ -53,7 +55,7 @@ export default class LoginPage extends React.Component {
             .signInWithEmailAndPassword(email, senha)
             .then(
                 user => {
-                    this.access()
+                    this.access(user)
                 }
             )
             .catch(
@@ -73,13 +75,13 @@ export default class LoginPage extends React.Component {
             .auth()
             .createUserWithEmailAndPassword(email, senha)
             .then(user => {
-                this.access();
+                this.access(user);
             })
             .catch(error => {
                 this.setState(
-                    { 
-                        message: this.getMsgByErrorCode(error.code), 
-                        isLoading: false 
+                    {
+                        message: this.getMsgByErrorCode(error.code),
+                        isLoading: false
                     });
             });
     }
@@ -113,16 +115,15 @@ export default class LoginPage extends React.Component {
     }
 
     componentDidMount() {
-        var firebaseConfig = {
-            apiKey: "AIzaSyB68rnvltR2YSEdwY_bkdyelSXk70FFv6M",
-            authDomain: "notestimeline-benevenuti.firebaseapp.com",
-            databaseURL: "https://notestimeline-benevenuti.firebaseio.com",
-            projectId: "notestimeline-benevenuti",
-            storageBucket: "notestimeline-benevenuti.appspot.com",
-            messagingSenderId: "629243823194",
-            appId: "1:629243823194:web:9b698c87c755ac91a4c463",
-            measurementId: "G-NFXQS4Y75X"
-        };
+        AsyncStorage.getItem('NT:UserData')
+            .then((userDataJson) => {
+                let userData = JSON.parse(userDataJson);
+                if (userData != null) {
+                    this.access(userData);
+                }
+            })
+
+        firebaseConfig = require('../../firebaseConfig.json')
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
@@ -130,7 +131,7 @@ export default class LoginPage extends React.Component {
 
     renderButton() {
         if (this.state.isLoading)
-            return <ActivityIndicator size='large' style={styles.loading}> </ActivityIndicator>
+            return <ActivityIndicator size='large' style={styles.loading} />
 
         return (
             <View>
