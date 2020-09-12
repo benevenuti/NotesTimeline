@@ -1,21 +1,43 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack'
+import LoginPage from './src/pages/LoginPage';
+import PeoplePage from './src/pages/PeoplePage';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const AppNavigator = createStackNavigator({
+  "Login": {
+    screen: LoginPage,
+    navigationOptions: {
+      headerShown: false,
+    }
+  }, 'Pessoas': {
+    screen: PeoplePage,
+    navigationOptions: {
+      title: 'Pessoas',
+      headerTitleStyle: {
+        textAlign: 'left',
+        fontSize: 20
+      }
+    },
   },
-});
+},
+  {
+    defaultNavigationOptions: {
+      title: 'NotesTimeline',
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: '#6542f4',
+        borderBottomColor: '#f4f2ff'
+      },
+      headerTitleStyle: {
+        color: 'white',
+        fontSize: 20,
+        flexGrow: 1,
+        textAlign: 'center'
+      }
+    }
+  }
+);
+
+const AppContainter = createAppContainer(AppNavigator);
+
+export default AppContainter;

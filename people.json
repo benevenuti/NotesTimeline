@@ -1,0 +1,42 @@
+[
+{
+    "id": "0",
+    "nome": "Caio Murilo Mühlen Benevenuti",
+    "tipo": "Filho"
+},
+{
+    "id": "1",
+    "nome": "Ícaro Mühlen Benevenuti",
+    "tipo": "Filho"
+},
+{
+    "id": "2",
+    "nome": "Luiz Eduardo Mühlen Jardim",
+    "tipo": "Enteado"
+},
+{
+    "id": "3",
+    "nome": "Felipe Fursto",
+    "tipo": "Colega"
+},
+{
+    "id": "4",
+    "nome": "Márcia Urbano da Silva",
+    "tipo": "Mãe"
+},
+{
+    "id": "5",
+    "nome": "Ivan de Lima Benevenuti",
+    "tipo": "Pai"
+},
+{
+    "id": "6",
+    "nome": "Karen Peres Mühlen",
+    "tipo": "Esposa"
+},
+{
+    "id": "7",
+    "nome": "Lucas Benevenuti",
+    "tipo": "Irmão"
+}
+]
