@@ -1,10 +1,9 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import PeopleList from '../components/PeopleList';
-import peopleJson from '../../people.json';
 import { FloatingAction } from 'react-native-floating-action';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/compat';
 
 export default class PeoplePage extends React.Component {
     constructor(props) {
