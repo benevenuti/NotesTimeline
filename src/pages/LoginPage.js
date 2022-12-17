@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, ScrollView, TextInput, Button, View, Image, KeyboardAvoidingView, Platform, ActivityIndicator, Alert, AsyncStorage } from 'react-native';
+import { StyleSheet, ScrollView, TextInput, Button, View, Image, KeyboardAvoidingView, Platform, ActivityIndicator, Alert } from 'react-native';
 import FormRow from '../components/FormRow';
-import firebase from 'firebase';
+import firebase from "firebase/compat";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default class LoginPage extends React.Component {
     constructor(props) {
